@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.IO;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
@@ -12,6 +15,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using YouTubeDisco.ViewModels;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
@@ -22,9 +26,17 @@ namespace YouTubeDisco
     /// </summary>
     public sealed partial class MainPage : Page
     {
+        private readonly SearchResultsVM _searchResultsVm = new SearchResultsVM();
+
         public MainPage()
         {
             this.InitializeComponent();
+            DataContext = _searchResultsVm;
+        }
+
+        private void SearchBox_OnQuerySubmitted(SearchBox sender, SearchBoxQuerySubmittedEventArgs args)
+        {
+            _searchResultsVm.Query(args.QueryText);
         }
     }
 }

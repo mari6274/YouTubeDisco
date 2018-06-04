@@ -7,7 +7,27 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
+    <Page.Resources>
+        <DataTemplate x:Key="SearchResultTemplate">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="20" />
+                    <RowDefinition Height="20" />
+                </Grid.RowDefinitions>
+                <TextBlock Text="{Binding Title}" />
+                <TextBlock Grid.Row="1" Text="{Binding Description}" />
+            </Grid>
+        </DataTemplate>
+    </Page.Resources>
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <SearchBox x:Uid="SearchBox"
+                   QuerySubmitted="SearchBox_OnQuerySubmitted" />
+        <ListBox Grid.Row="1"
+                 ItemsSource="{Binding SearchResults}"
+                 ItemTemplate="{StaticResource SearchResultTemplate}" />
     </Grid>
 </Page>
