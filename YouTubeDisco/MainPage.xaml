@@ -25,17 +25,20 @@
                         </Image.Source>
                     </Image>
                     <TextBlock Margin="5" Grid.Row="0" Text="{Binding Title}" Grid.Column="1" FontSize="20" />
-                    <TextBlock Margin="5" Grid.Row="1" Grid.Column="1" Text="{Binding Description}" TextWrapping="WrapWholeWords" VerticalAlignment="Top" />
+                    <TextBlock Margin="5" Grid.Row="1" Grid.Column="1" Text="{Binding Description}"
+                               TextWrapping="WrapWholeWords" VerticalAlignment="Top" />
                 </Grid>
             </DataTemplate>
         </Grid.Resources>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         <SearchBox x:Uid="SearchBox"
                    QuerySubmitted="SearchBox_OnQuerySubmitted" />
         <ListView Grid.Row="1" Name="SearchResultsListView"
                   ItemTemplate="{StaticResource SearchResultTemplate}" />
+        <ProgressBar Grid.Row="2" IsIndeterminate="True" Name="SearchResultsProgressBar" Visibility="Collapsed"/>
     </Grid>
 </Page>

@@ -37,7 +37,7 @@ namespace YouTubeDisco
 
         private void SearchBox_OnQuerySubmitted(SearchBox sender, SearchBoxQuerySubmittedEventArgs args)
         {
-            SearchResultsListView.ItemsSource = _searchResultsVm.CreateNewCollection(args.QueryText);
+            SearchResultsListView.ItemsSource = _searchResultsVm.CreateNewCollection(args.QueryText, SearchResultsProgressBar);
         }
     }
 }
