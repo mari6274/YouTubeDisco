@@ -15,7 +15,8 @@ namespace YouTubeDisco.Model.SearchEngine.YouTube
                     new SearchResult(
                         resource.Snippet.Title,
                         resource.Snippet.Description,
-                        "https://www.youtube.com/watch?v=" + resource.Id.VideoId))
+                        "https://www.youtube.com/watch?v=" + resource.Id.VideoId,
+                        resource.Snippet.Thumbnails.Default.Url))
                 .ToList();
             return new SearchResultPage(searchResults, 
                 searchListResponse.NextPageToken,

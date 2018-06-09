@@ -7,7 +7,6 @@ namespace YouTubeDisco.Model.SearchEngine.YouTube
     {
         public string NextPageToken { get; set; }
         public string PrevPageToken { get; set; }
-        public PageInfo PageInfo { get; set; }
         public List<Resource> Items { get; set; }
     }
 
@@ -15,6 +14,16 @@ namespace YouTubeDisco.Model.SearchEngine.YouTube
     {
         public Id Id { get; set; }
         public Snippet Snippet { get; set; }
+    }
+
+    public class ThumbnailsSet
+    {
+        public Thumbnail Default { get; set; }
+    }
+
+    public class Thumbnail
+    {
+        public string Url { get; set; }
     }
 
     public class Id
@@ -26,11 +35,6 @@ namespace YouTubeDisco.Model.SearchEngine.YouTube
     {
         public string Title { get; set; }
         public string Description { get; set; }
-    }
-
-    public class PageInfo
-    {
-        public int TotalResults { get; set; }
-        public int ResultsPerPage { get; set; }
+        public ThumbnailsSet Thumbnails { get; set; }
     }
 }

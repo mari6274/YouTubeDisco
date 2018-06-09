@@ -12,11 +12,20 @@
             <DataTemplate x:Key="SearchResultTemplate">
                 <Grid>
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="20" />
-                        <RowDefinition Height="20" />
+                        <RowDefinition Height="45" />
+                        <RowDefinition Height="55" />
                     </Grid.RowDefinitions>
-                    <TextBlock Text="{Binding Title}" />
-                    <TextBlock Grid.Row="1" Text="{Binding Description}" />
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="130" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Image Margin="5" Grid.RowSpan="2">
+                        <Image.Source>
+                            <BitmapImage UriSource="{Binding ThumbnailUri}" />
+                        </Image.Source>
+                    </Image>
+                    <TextBlock Margin="5" Grid.Row="0" Text="{Binding Title}" Grid.Column="1" FontSize="20" />
+                    <TextBlock Margin="5" Grid.Row="1" Grid.Column="1" Text="{Binding Description}" TextWrapping="WrapWholeWords" VerticalAlignment="Top" />
                 </Grid>
             </DataTemplate>
         </Grid.Resources>
