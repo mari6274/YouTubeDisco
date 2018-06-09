@@ -1,9 +1,10 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace YouTubeDisco.Model.SearchEngine
 {
     public interface ISearchEngine
     {
-        List<SearchResult> Search(string query);
+        Task<SearchResultPage> Search(string query, string pageToken);
     }
 }
