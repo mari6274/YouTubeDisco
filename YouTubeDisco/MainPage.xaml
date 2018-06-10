@@ -10,7 +10,7 @@
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <Grid.Resources>
             <DataTemplate x:Key="SearchResultTemplate">
-                <Grid>
+                <Grid HorizontalAlignment="Stretch">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="45" />
                         <RowDefinition Height="55" />
@@ -18,6 +18,7 @@
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="130" />
                         <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
                     </Grid.ColumnDefinitions>
                     <Image Margin="5" Grid.RowSpan="2">
                         <Image.Source>
@@ -27,6 +28,8 @@
                     <TextBlock Margin="5" Grid.Row="0" Text="{Binding Title}" Grid.Column="1" FontSize="20" />
                     <TextBlock Margin="5" Grid.Row="1" Grid.Column="1" Text="{Binding Description}"
                                TextWrapping="WrapWholeWords" VerticalAlignment="Top" />
+                    <AppBarButton Icon="Download" Margin="5" Grid.Column="2" Grid.Row="0" Click="DownloadButton_OnClick" Width="30" Height="30"/>
+                    <ProgressRing Margin="5" Grid.Column="2" Grid.Row="1" Visibility="Visible" Width="20" Height="20" IsActive="{Binding DownloadProgressIsActive}"/>
                 </Grid>
             </DataTemplate>
         </Grid.Resources>
@@ -38,7 +41,13 @@
         <SearchBox x:Uid="SearchBox"
                    QuerySubmitted="SearchBox_OnQuerySubmitted" />
         <ListView Grid.Row="1" Name="SearchResultsListView"
-                  ItemTemplate="{StaticResource SearchResultTemplate}" />
-        <ProgressBar Grid.Row="2" IsIndeterminate="True" Name="SearchResultsProgressBar" Visibility="Collapsed"/>
+                  ItemTemplate="{StaticResource SearchResultTemplate}">
+            <ListView.ItemContainerStyle >
+                <Style TargetType="ListViewItem">
+                    <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                </Style>
+            </ListView.ItemContainerStyle>
+        </ListView>
+        <ProgressBar Grid.Row="2" IsIndeterminate="True" Name="SearchResultsProgressBar" Visibility="Collapsed" />
     </Grid>
 </Page>

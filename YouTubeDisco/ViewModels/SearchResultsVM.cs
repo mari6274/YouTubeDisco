@@ -11,7 +11,7 @@ using YouTubeDisco.Model.SearchEngine.YouTube;
 
 namespace YouTubeDisco.ViewModels
 {
-    class SearchResultsVm : ViewModel
+    class SearchResultsVm
     {
         private readonly ISearchEngine _searchEngine = new YouTubeSearchEngine();
 

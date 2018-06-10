@@ -105,7 +105,6 @@
     <Compile Include="Model\SearchEngine\YouTube\YouTubeApi.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\SearchResultsVm.cs" />
-    <Compile Include="ViewModels\ViewModel.cs" />
     <Compile Include="Model\SearchEngine\YouTube\YouTubeSearchEngine.cs" />
   </ItemGroup>
   <ItemGroup>

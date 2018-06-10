@@ -1,20 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.IO;
-using System.Linq;
-using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
+using System.Threading.Tasks;
+using Windows.Storage;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
-using Windows.UI.Xaml.Navigation;
+using VideoLibrary;
 using YouTubeDisco.Model.SearchEngine;
 using YouTubeDisco.ViewModels;
 
@@ -37,7 +27,31 @@ namespace YouTubeDisco
 
         private void SearchBox_OnQuerySubmitted(SearchBox sender, SearchBoxQuerySubmittedEventArgs args)
         {
-            SearchResultsListView.ItemsSource = _searchResultsVm.CreateNewCollection(args.QueryText, SearchResultsProgressBar);
+            SearchResultsListView.ItemsSource =
+                _searchResultsVm.CreateNewCollection(args.QueryText, SearchResultsProgressBar);
+        }
+
+        private async void DownloadButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            var button = (Button) sender;
+            var searchResult = (SearchResult) button.DataContext;
+            searchResult.DownloadProgressIsActive = true;
+            await DownloadVideo(searchResult);
+            searchResult.DownloadProgressIsActive = false;
+        }
+
+        private async Task DownloadVideo(SearchResult searchResult)
+        {
+            await Task.Run(async () =>
+            {
+                var youTube = YouTube.Default;
+                var video = youTube.GetVideo(searchResult.Url);
+                var youTubeDiscoFolder = await KnownFolders.VideosLibrary
+                    .CreateFolderAsync("YouTubeDisco", CreationCollisionOption.OpenIfExists);
+                var file = await youTubeDiscoFolder
+                    .CreateFileAsync(video.FullName, CreationCollisionOption.GenerateUniqueName);
+                FileIO.WriteBufferAsync(file, video.GetBytes().AsBuffer());
+            });
         }
     }
 }
