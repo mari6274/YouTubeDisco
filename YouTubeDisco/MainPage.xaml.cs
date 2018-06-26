@@ -6,6 +6,8 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using VideoLibrary;
 using YouTubeDisco.Model.SearchEngine;
+using YouTubeDisco.Model.VideoDownloader;
+using YouTubeDisco.Model.VideoDownloader.VideoLibrary;
 using YouTubeDisco.ViewModels;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
@@ -18,6 +20,7 @@ namespace YouTubeDisco
     public sealed partial class MainPage : Page
     {
         private readonly SearchResultsVm _searchResultsVm = new SearchResultsVm();
+        private readonly IVideoDownloader _videoDownloader = new VideoLibraryVideoDownloader();
 
         public MainPage()
         {
@@ -36,22 +39,13 @@ namespace YouTubeDisco
             var button = (Button) sender;
             var searchResult = (SearchResult) button.DataContext;
             searchResult.DownloadProgressIsActive = true;
-            await DownloadVideo(searchResult);
+
+            var youTubeDiscoFolder = await KnownFolders.VideosLibrary
+                .CreateFolderAsync("YouTubeDisco", CreationCollisionOption.OpenIfExists);
+
+            await _videoDownloader.DownloadVideo(searchResult, youTubeDiscoFolder);
             searchResult.DownloadProgressIsActive = false;
         }
-
-        private async Task DownloadVideo(SearchResult searchResult)
-        {
-            await Task.Run(async () =>
-            {
-                var youTube = YouTube.Default;
-                var video = youTube.GetVideo(searchResult.Url);
-                var youTubeDiscoFolder = await KnownFolders.VideosLibrary
-                    .CreateFolderAsync("YouTubeDisco", CreationCollisionOption.OpenIfExists);
-                var file = await youTubeDiscoFolder
-                    .CreateFileAsync(video.FullName, CreationCollisionOption.GenerateUniqueName);
-                FileIO.WriteBufferAsync(file, video.GetBytes().AsBuffer());
-            });
-        }
+        
     }
 }
