@@ -28,7 +28,7 @@ namespace YouTubeDisco
             DataContext = _searchResultsVm;
         }
 
-        private void SearchBox_OnQuerySubmitted(SearchBox sender, SearchBoxQuerySubmittedEventArgs args)
+        private void SearchBox_OnQuerySubmitted(AutoSuggestBox sender, AutoSuggestBoxQuerySubmittedEventArgs args)
         {
             SearchResultsListView.ItemsSource =
                 _searchResultsVm.CreateNewCollection(args.QueryText, SearchResultsProgressBar);
@@ -46,6 +46,5 @@ namespace YouTubeDisco
             await _videoDownloader.DownloadVideo(searchResult, youTubeDiscoFolder);
             searchResult.DownloadProgressIsActive = false;
         }
-        
     }
 }

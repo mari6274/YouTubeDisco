@@ -28,8 +28,10 @@
                     <TextBlock Margin="5" Grid.Row="0" Text="{Binding Title}" Grid.Column="1" FontSize="20" />
                     <TextBlock Margin="5" Grid.Row="1" Grid.Column="1" Text="{Binding Description}"
                                TextWrapping="WrapWholeWords" VerticalAlignment="Top" />
-                    <AppBarButton Icon="Download" Margin="5" Grid.Column="2" Grid.Row="0" Click="DownloadButton_OnClick" Width="30" Height="30"/>
-                    <ProgressRing Margin="5" Grid.Column="2" Grid.Row="1" Visibility="Visible" Width="20" Height="20" IsActive="{Binding DownloadProgressIsActive}"/>
+                    <AppBarButton Icon="Download" Margin="5" Grid.Column="2" Grid.Row="0"
+                                  Click="DownloadButton_OnClick" Width="30" Height="30" />
+                    <ProgressRing Margin="5" Grid.Column="2" Grid.Row="1" Visibility="Visible" Width="20" Height="20"
+                                  IsActive="{Binding DownloadProgressIsActive}" />
                 </Grid>
             </DataTemplate>
         </Grid.Resources>
@@ -38,11 +40,12 @@
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        <SearchBox x:Uid="SearchBox"
-                   QuerySubmitted="SearchBox_OnQuerySubmitted" />
+        <AutoSuggestBox x:Uid="SearchBox"
+                        QueryIcon="Find"
+                        QuerySubmitted="SearchBox_OnQuerySubmitted" />
         <ListView Grid.Row="1" Name="SearchResultsListView"
                   ItemTemplate="{StaticResource SearchResultTemplate}">
-            <ListView.ItemContainerStyle >
+            <ListView.ItemContainerStyle>
                 <Style TargetType="ListViewItem">
                     <Setter Property="HorizontalContentAlignment" Value="Stretch" />
                 </Style>
