@@ -5,6 +5,8 @@ using Windows.Storage;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using VideoLibrary;
+using YouTubeDisco.Model.AudioExtractor;
+using YouTubeDisco.Model.AudioExtractor.MediaTranscoder;
 using YouTubeDisco.Model.SearchEngine;
 using YouTubeDisco.Model.VideoDownloader;
 using YouTubeDisco.Model.VideoDownloader.VideoLibrary;
@@ -21,6 +23,7 @@ namespace YouTubeDisco
     {
         private readonly SearchResultsVm _searchResultsVm = new SearchResultsVm();
         private readonly IVideoDownloader _videoDownloader = new VideoLibraryVideoDownloader();
+        private readonly IAudioExtractor _audioExtractor = new MediaTranscoderAudioExtractor();
 
         public MainPage()
         {
@@ -40,10 +43,14 @@ namespace YouTubeDisco
             var searchResult = (SearchResult) button.DataContext;
             searchResult.DownloadProgressIsActive = true;
 
-            var youTubeDiscoFolder = await KnownFolders.VideosLibrary
+            var youTubeDiscoVideoFolder = await KnownFolders.VideosLibrary
                 .CreateFolderAsync("YouTubeDisco", CreationCollisionOption.OpenIfExists);
+            var videoFile = await _videoDownloader.DownloadVideo(searchResult, youTubeDiscoVideoFolder);
 
-            await _videoDownloader.DownloadVideo(searchResult, youTubeDiscoFolder);
+            var youTubeDiscoMusicFolder = await KnownFolders.MusicLibrary
+                .CreateFolderAsync("YouTubeDisco", CreationCollisionOption.OpenIfExists);
+            await _audioExtractor.ExtractAudio(videoFile, youTubeDiscoMusicFolder);
+
             searchResult.DownloadProgressIsActive = false;
         }
     }

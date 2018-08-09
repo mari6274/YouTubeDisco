@@ -10,14 +10,15 @@ namespace YouTubeDisco.Model.VideoDownloader.VideoLibrary
     public class VideoLibraryVideoDownloader : IVideoDownloader
     {
 
-        public async Task DownloadVideo(SearchResult searchResult, StorageFolder youTubeDiscoFolder)
+        public async Task<StorageFile> DownloadVideo(SearchResult searchResult, StorageFolder outputFolder)
         {
-            await Task.Run(async () =>
+            return await Task.Run(async () =>
             {
                 var youTube = YouTube.Default;
                 var video = youTube.GetVideo(searchResult.Url);
-                var file = await youTubeDiscoFolder.CreateFileAsync(video.FullName, CreationCollisionOption.GenerateUniqueName);
+                var file = await outputFolder.CreateFileAsync(video.FullName, CreationCollisionOption.GenerateUniqueName);
                 await FileIO.WriteBufferAsync(file, video.GetBytes().AsBuffer());
+                return file;
             });
         }
     }
