@@ -6,7 +6,9 @@ namespace YouTubeDisco.Model.SearchEngine.YouTube
     internal class YouTubeSearchEngine : ISearchEngine
     {
         private const string YoutubeWatchUrl = "https://www.youtube.com/watch?v=";
-        private readonly YouTubeApi _api = new YouTubeApi();
+        private readonly YouTubeApi _api;
+
+        public YouTubeSearchEngine(YouTubeApi api) => _api = api;
 
         public async Task<SearchResultPage> Search(string query, string pageToken)
         {

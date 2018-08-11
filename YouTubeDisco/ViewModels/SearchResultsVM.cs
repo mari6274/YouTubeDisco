@@ -11,9 +11,14 @@ using YouTubeDisco.Model.SearchEngine.YouTube;
 
 namespace YouTubeDisco.ViewModels
 {
-    class SearchResultsVm
+    public class SearchResultsVm
     {
-        private readonly ISearchEngine _searchEngine = new YouTubeSearchEngine();
+        private readonly ISearchEngine _searchEngine;
+
+        public SearchResultsVm(ISearchEngine searchEngine)
+        {
+            _searchEngine = searchEngine;
+        }
 
         public ObservableCollection<SearchResult> CreateNewCollection(string queryText, ProgressBar progressBar)
         {
@@ -21,14 +26,13 @@ namespace YouTubeDisco.ViewModels
         }
     }
 
-    class SearchResultCollection : ObservableCollection<SearchResult>, ISupportIncrementalLoading
+    internal class SearchResultCollection : ObservableCollection<SearchResult>, ISupportIncrementalLoading
     {
         private readonly string _query;
         private readonly ProgressBar _progressBar;
         private readonly ISearchEngine _searchEngine;
         private string _nextPageToken;
-        private bool _hasMoreItems = true;
-        public bool HasMoreItems => _hasMoreItems;
+        public bool HasMoreItems { get; private set; } = true;
 
         public SearchResultCollection(ISearchEngine searchEngine, string query, ProgressBar progressBar)
         {
@@ -49,7 +53,7 @@ namespace YouTubeDisco.ViewModels
                 searchResultPage = await _searchEngine.Search(_query, _nextPageToken);
 
                 _nextPageToken = searchResultPage.NextPageToken;
-                _hasMoreItems = _nextPageToken != null;
+                HasMoreItems = _nextPageToken != null;
 
                 coreDispatcher.RunAsync(CoreDispatcherPriority.Normal,
                     () =>

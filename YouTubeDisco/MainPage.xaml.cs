@@ -22,14 +22,32 @@ namespace YouTubeDisco
     /// </summary>
     public sealed partial class MainPage : Page
     {
-        private readonly SearchResultsVm _searchResultsVm = new SearchResultsVm();
-        private readonly IVideoDownloader _videoDownloader = new VideoLibraryVideoDownloader();
-        private readonly IAudioExtractor _audioExtractor = new MediaTranscoderAudioExtractor();
+        private SearchResultsVm _searchResultsVm;
+        private IVideoDownloader _videoDownloader;
+        private IAudioExtractor _audioExtractor;
+
+        public IAudioExtractor AudioExtractor
+        {
+            set => _audioExtractor = value;
+        }
+
+        public IVideoDownloader VideoDownloader
+        {
+            set => _videoDownloader = value;
+        }
+
+        public SearchResultsVm SearchResultsVm
+        {
+            set
+            {
+                _searchResultsVm = value;
+                DataContext = value;
+            }
+        }
 
         public MainPage()
         {
             this.InitializeComponent();
-            DataContext = _searchResultsVm;
         }
 
         private void SearchBox_OnQuerySubmitted(AutoSuggestBox sender, AutoSuggestBoxQuerySubmittedEventArgs args)
