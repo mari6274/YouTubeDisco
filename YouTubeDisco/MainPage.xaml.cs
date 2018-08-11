@@ -2,6 +2,7 @@
 using System.Runtime.InteropServices.WindowsRuntime;
 using System.Threading.Tasks;
 using Windows.Storage;
+using Windows.System;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using VideoLibrary;
@@ -52,6 +53,18 @@ namespace YouTubeDisco
             await _audioExtractor.ExtractAudio(videoFile, youTubeDiscoMusicFolder);
 
             searchResult.DownloadProgressIsActive = false;
+        }
+
+        private void SettingsButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            this.Frame.Navigate(typeof(SettingsPage));
+        }
+
+        private async void OpenStorageLocation_OnClick(object sender, RoutedEventArgs e)
+        {
+            var storageFolder = await KnownFolders.MusicLibrary
+                .CreateFolderAsync("YouTubeDisco", CreationCollisionOption.OpenIfExists);
+            Launcher.LaunchFolderAsync(storageFolder);
         }
     }
 }
