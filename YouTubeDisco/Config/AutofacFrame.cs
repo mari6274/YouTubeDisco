@@ -37,6 +37,8 @@ namespace YouTubeDisco.Config
                 .SingleInstance();
             containerBuilder.RegisterType<HttpClient>()
                 .SingleInstance();
+            containerBuilder.RegisterType<Settings>()
+                .SingleInstance();
             //Dependencies registration
 
             _container = containerBuilder.Build();

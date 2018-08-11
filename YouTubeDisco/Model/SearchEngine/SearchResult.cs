@@ -22,7 +22,7 @@ namespace YouTubeDisco.Model.SearchEngine
 
         public bool DownloadProgressIsActive
         {
-            get { return _downloadProgressIsActive; }
+            get => _downloadProgressIsActive;
             set
             {
                 _downloadProgressIsActive = value;
