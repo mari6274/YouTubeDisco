@@ -8,7 +8,7 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
     d:DataContext="{d:DesignData Settings}">
 
-    <StackPanel Orientation="Vertical">
+    <StackPanel Orientation="Vertical" Padding="5" Spacing="5">
         <TextBox x:Uid="/SettingsPage/StorageFolderName" Text="{Binding StorageFolderName, Mode=TwoWay}" />
         <ToggleSwitch x:Uid="/SettingsPage/RemoveVideosToggleSwitch" IsOn="{Binding RemoveVideos, Mode=TwoWay}"/>
     </StackPanel>
