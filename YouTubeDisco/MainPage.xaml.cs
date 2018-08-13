@@ -77,6 +77,11 @@ namespace YouTubeDisco
                 .CreateFolderAsync(_settings.StorageFolderName, CreationCollisionOption.OpenIfExists);
             await _audioExtractor.ExtractAudio(videoFile, youTubeDiscoMusicFolder);
 
+            if (_settings.RemoveVideos)
+            {
+                await videoFile.DeleteAsync(StorageDeleteOption.PermanentDelete);
+            }
+
             searchResult.DownloadProgressIsActive = false;
         }
 

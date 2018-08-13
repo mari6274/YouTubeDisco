@@ -117,7 +117,16 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="StorageFolderName.Text" xml:space="preserve">
+  <data name="RemoveVideosToggleSwitch.Header" xml:space="preserve">
+    <value>Usuwać wideo?</value>
+  </data>
+  <data name="RemoveVideosToggleSwitch.OffContent" xml:space="preserve">
+    <value>Nie</value>
+  </data>
+  <data name="RemoveVideosToggleSwitch.OnContent" xml:space="preserve">
+    <value>Tak</value>
+  </data>
+  <data name="StorageFolderName.Header" xml:space="preserve">
     <value>Nazwa katalogu zapisu</value>
   </data>
 </root>

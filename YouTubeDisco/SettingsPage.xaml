@@ -9,7 +9,7 @@
     d:DataContext="{d:DesignData Settings}">
 
     <StackPanel Orientation="Vertical">
-        <TextBlock x:Uid="/SettingsPage/StorageFolderName" />
-        <TextBox Text="{Binding StorageFolderName, Mode=TwoWay}" />
+        <TextBox x:Uid="/SettingsPage/StorageFolderName" Text="{Binding StorageFolderName, Mode=TwoWay}" />
+        <ToggleSwitch x:Uid="/SettingsPage/RemoveVideosToggleSwitch" IsOn="{Binding RemoveVideos, Mode=TwoWay}"/>
     </StackPanel>
 </Page>
