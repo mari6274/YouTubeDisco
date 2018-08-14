@@ -9,8 +9,6 @@ namespace YouTubeDisco
 
         public virtual void PostInjectionInitialize()
         {
-            RequestedTheme = Settings.Theme;
-            Settings.ThemeChanged += (sender, eventArgs) => { RequestedTheme = Settings.Theme; };
         }
     }
 }

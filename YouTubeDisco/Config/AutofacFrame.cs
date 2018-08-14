@@ -42,6 +42,15 @@ namespace YouTubeDisco.Config
             //Dependencies registration
 
             _container = containerBuilder.Build();
+
+            InitializeFrame();
+        }
+
+        private void InitializeFrame()
+        {
+            var settings = _container.Resolve<Settings>();
+            RequestedTheme = settings.Theme;
+            settings.ThemeChanged += (sender, args) => { RequestedTheme = settings.Theme; };
         }
 
         protected override void OnContentChanged(object oldContent, object newContent)
