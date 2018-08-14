@@ -1,15 +1,25 @@
-﻿<Page
+﻿<local:BasePage
     x:Class="YouTubeDisco.SettingsPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:converters="using:YouTubeDisco.Converters"
+    xmlns:local="using:YouTubeDisco"
     mc:Ignorable="d"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
-    d:DataContext="{d:DesignData Settings}">
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <StackPanel Orientation="Vertical" Padding="5" Spacing="5">
+        <StackPanel.Resources>
+            <converters:ThemeComboBoxConverter x:Key="ThemeConverter" />
+        </StackPanel.Resources>
         <TextBox x:Uid="/SettingsPage/StorageFolderName" Text="{Binding StorageFolderName, Mode=TwoWay}" />
-        <ToggleSwitch x:Uid="/SettingsPage/RemoveVideosToggleSwitch" IsOn="{Binding RemoveVideos, Mode=TwoWay}"/>
+        <ToggleSwitch x:Uid="/SettingsPage/RemoveVideosToggleSwitch" IsOn="{Binding RemoveVideos, Mode=TwoWay}" />
+        <ComboBox x:Uid="/SettingsPage/ChooseThemeComboBox"
+                  SelectedIndex="{Binding Theme, Mode=TwoWay, Converter={StaticResource ThemeConverter}}">
+            <ComboBoxItem x:Uid="/SettingsPage/LightThemeItem" />
+            <ComboBoxItem x:Uid="/SettingsPage/DarkThemeItem" />
+            <ComboBoxItem x:Uid="/SettingsPage/SystemThemeItem" />
+        </ComboBox>
     </StackPanel>
-</Page>
+</local:BasePage>

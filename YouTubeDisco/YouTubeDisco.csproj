@@ -98,6 +98,7 @@
     <Compile Include="Config\AutofacFrame.cs" />
     <Compile Include="Config\Settings.cs" />
     <Compile Include="Converters\NegationValueConverter.cs" />
+    <Compile Include="Converters\ThemeComboBoxConverter.cs" />
     <Compile Include="Model\AudioExtractor\MediaTranscoder\MediaTranscoderAudioExtractor.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
@@ -112,6 +113,9 @@
     <Compile Include="Model\VideoDownloader\VideoLibrary\VideoLibraryVideoDownloader.cs" />
     <Compile Include="Properties\Annotations2.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="BasePage.xaml.cs">
+      <DependentUpon>BasePage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="SettingsPage.xaml.cs">
       <DependentUpon>SettingsPage.xaml</DependentUpon>
     </Compile>
@@ -144,6 +148,10 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Page Include="MainPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="BasePage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

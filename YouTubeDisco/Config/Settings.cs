@@ -1,14 +1,14 @@
-﻿using System.ComponentModel;
-using System.Runtime.CompilerServices;
-using YouTubeDisco.Annotations;
+﻿using System;
+using Windows.UI.Xaml;
 
 namespace YouTubeDisco.Config
 {
-    public class Settings : INotifyPropertyChanged
+    public class Settings
     {
         private const string StorageFolderNameKey = "StorageFolderName";
         private const string RemoveVideosKey = "RemoveVideos";
         private const string DefaultStorageFolderName = "YouTubeDisco";
+        private const string ThemeKey = "Theme";
 
         public Settings()
         {
@@ -47,12 +47,18 @@ namespace YouTubeDisco.Config
             set => Windows.Storage.ApplicationData.Current.RoamingSettings.Values[RemoveVideosKey] = value;
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        [NotifyPropertyChangedInvocator]
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        public ElementTheme Theme
         {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            get => Enum.TryParse(
+                Windows.Storage.ApplicationData.Current.LocalSettings.Values[ThemeKey] as string,
+                out ElementTheme theme) ? theme : ElementTheme.Default;
+            set
+            {
+                Windows.Storage.ApplicationData.Current.LocalSettings.Values[ThemeKey] = value.ToString();
+                ThemeChanged?.Invoke(this, new EventArgs());
+            }
         }
+
+        public event EventHandler ThemeChanged;
     }
 }

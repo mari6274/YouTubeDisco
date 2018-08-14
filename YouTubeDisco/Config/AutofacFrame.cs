@@ -48,6 +48,7 @@ namespace YouTubeDisco.Config
         {
             base.OnContentChanged(oldContent, newContent);
             _container.InjectUnsetProperties(newContent);
+            (newContent as BasePage)?.PostInjectionInitialize();
         }
     }
 }
