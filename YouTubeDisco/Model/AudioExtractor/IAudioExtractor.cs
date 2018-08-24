@@ -5,6 +5,6 @@ namespace YouTubeDisco.Model.AudioExtractor
 {
     public interface IAudioExtractor
     {
-        Task ExtractAudio(StorageFile videoFile, StorageFolder outputFolder);
+        Task<ExtractionResult> ExtractAudio(StorageFile videoFile, StorageFolder outputFolder);
     }
 }

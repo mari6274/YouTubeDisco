@@ -1,6 +1,8 @@
 ﻿using System;
+using Windows.ApplicationModel.Resources;
 using Windows.Storage;
 using Windows.System;
+using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using YouTubeDisco.Model.AudioExtractor;
@@ -15,6 +17,7 @@ namespace YouTubeDisco
         private SearchResultsVm _searchResultsVm;
         private IVideoDownloader _videoDownloader;
         private IAudioExtractor _audioExtractor;
+        private readonly ResourceLoader _resourceLoader;
 
         public IAudioExtractor AudioExtractor
         {
@@ -38,6 +41,7 @@ namespace YouTubeDisco
         public MainPage()
         {
             this.InitializeComponent();
+            _resourceLoader = Windows.ApplicationModel.Resources.ResourceLoader.GetForCurrentView("MainPage");
         }
 
         private void SearchBox_OnQuerySubmitted(AutoSuggestBox sender, AutoSuggestBoxQuerySubmittedEventArgs args)
@@ -58,7 +62,17 @@ namespace YouTubeDisco
 
             var youTubeDiscoMusicFolder = await KnownFolders.MusicLibrary
                 .CreateFolderAsync(Settings.StorageFolderName, CreationCollisionOption.OpenIfExists);
-            await _audioExtractor.ExtractAudio(videoFile, youTubeDiscoMusicFolder);
+            var extractionResult = await _audioExtractor.ExtractAudio(videoFile, youTubeDiscoMusicFolder);
+
+            if (extractionResult == ExtractionResult.CodecNotFound)
+            {
+                ShowMessageDialog("MissingMpeg3Encoder");
+            }
+
+            if (extractionResult == ExtractionResult.Failed)
+            {
+                ShowMessageDialog("UnexpectedError");
+            }
 
             if (Settings.RemoveVideos)
             {
@@ -66,6 +80,13 @@ namespace YouTubeDisco
             }
 
             searchResult.DownloadProgressIsActive = false;
+        }
+
+        private void ShowMessageDialog(string contentTextKey)
+        {
+            var messageDialog = new MessageDialog(_resourceLoader.GetString(contentTextKey));
+            messageDialog.Commands.Add(new UICommand(_resourceLoader.GetString("Close")));
+            messageDialog.ShowAsync();
         }
 
         private void SettingsButton_OnClick(object sender, RoutedEventArgs e)

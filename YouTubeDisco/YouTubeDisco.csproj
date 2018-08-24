@@ -99,6 +99,7 @@
     <Compile Include="Config\Settings.cs" />
     <Compile Include="Converters\NegationValueConverter.cs" />
     <Compile Include="Converters\ThemeComboBoxConverter.cs" />
+    <Compile Include="Model\AudioExtractor\ExtractionResult.cs" />
     <Compile Include="Model\AudioExtractor\MediaTranscoder\MediaTranscoderAudioExtractor.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>

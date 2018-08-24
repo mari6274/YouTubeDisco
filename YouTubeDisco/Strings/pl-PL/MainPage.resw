@@ -117,6 +117,12 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Close" xml:space="preserve">
+    <value>Zamknij</value>
+  </data>
+  <data name="MissingMpeg3Encoder" xml:space="preserve">
+    <value>Brak kodera MPEG-3 na tym urządzeniu</value>
+  </data>
   <data name="OpenStorageLocationButton.Label" xml:space="preserve">
     <value>Otwórz lokalizację zapisu</value>
   </data>
@@ -125,5 +131,8 @@
   </data>
   <data name="SettingsButton.Label" xml:space="preserve">
     <value>Ustawienia</value>
+  </data>
+  <data name="UnexpectedError" xml:space="preserve">
+    <value>Wystąpił nieoczekiwany błąd</value>
   </data>
 </root>
