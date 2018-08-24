@@ -9,12 +9,14 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <StackPanel Orientation="Vertical" Padding="5" Spacing="5">
+    <StackPanel Orientation="Vertical" Padding="5">
         <StackPanel.Resources>
             <converters:ThemeComboBoxConverter x:Key="ThemeConverter" />
         </StackPanel.Resources>
         <TextBox x:Uid="/SettingsPage/StorageFolderName" Text="{Binding StorageFolderName, Mode=TwoWay}" />
+        <Rectangle Height="5"/>
         <ToggleSwitch x:Uid="/SettingsPage/RemoveVideosToggleSwitch" IsOn="{Binding RemoveVideos, Mode=TwoWay}" />
+        <Rectangle  Height="5"/>
         <ComboBox x:Uid="/SettingsPage/ChooseThemeComboBox"
                   SelectedIndex="{Binding Theme, Mode=TwoWay, Converter={StaticResource ThemeConverter}}">
             <ComboBoxItem x:Uid="/SettingsPage/LightThemeItem" />
