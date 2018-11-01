@@ -5,7 +5,7 @@ namespace YouTubeDisco.Model.SearchEngine
 {
     public class SearchResult : INotifyPropertyChanged
     {
-        private bool _downloadProgressIsActive = false;
+        private bool _downloadProgressIsActive;
 
         public SearchResult(string title, string description, string url, string thumbnailUri)
         {

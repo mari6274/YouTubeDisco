@@ -40,8 +40,8 @@ namespace YouTubeDisco
 
         public MainPage()
         {
-            this.InitializeComponent();
-            _resourceLoader = Windows.ApplicationModel.Resources.ResourceLoader.GetForCurrentView("MainPage");
+            InitializeComponent();
+            _resourceLoader = ResourceLoader.GetForCurrentView("MainPage");
         }
 
         private void SearchBox_OnQuerySubmitted(AutoSuggestBox sender, AutoSuggestBoxQuerySubmittedEventArgs args)
@@ -91,7 +91,7 @@ namespace YouTubeDisco
 
         private void SettingsButton_OnClick(object sender, RoutedEventArgs e)
         {
-            this.Frame.Navigate(typeof(SettingsPage));
+            Frame.Navigate(typeof(SettingsPage));
         }
 
         private async void OpenStorageLocation_OnClick(object sender, RoutedEventArgs e)

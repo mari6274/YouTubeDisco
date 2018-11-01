@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using Windows.Devices.Printers;
+﻿using System.Collections.Generic;
 
 namespace YouTubeDisco.Model.SearchEngine
 {
