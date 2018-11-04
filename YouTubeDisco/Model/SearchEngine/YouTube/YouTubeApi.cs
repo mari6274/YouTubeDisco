@@ -6,18 +6,22 @@ namespace YouTubeDisco.Model.SearchEngine.YouTube
 {
     public class YouTubeApi
     {
-        private const string ApiKey = "AIzaSyAqsB7nHTG7IzX0DtVZYOFLbvYa8TJFGn4";
         private const string ApiAddress = "https://www.googleapis.com/youtube/v3/";
         private const string Resource = "search";
 
         private readonly HttpClient _httpClient;
+        private readonly IApiKeyProvider _apiKeyProvider;
 
-        public YouTubeApi(HttpClient httpClient) => _httpClient = httpClient;
+        public YouTubeApi(HttpClient httpClient, IApiKeyProvider apiKeyProvider)
+        {
+            _httpClient = httpClient;
+            _apiKeyProvider = apiKeyProvider;
+        }
 
         internal async Task<SearchListResponse> List(string query, string pageToken)
         {
-            var requestUri = ApiAddress + Resource + "?part=snippet&type=video&maxResults=5&key=" + ApiKey + "&q=" + query;
-            if (pageToken!= null)
+            var requestUri = ApiAddress + Resource + "?part=snippet&type=video&maxResults=5&key=" + _apiKeyProvider.getKey() + "&q=" + query;
+            if (pageToken != null)
             {
                 requestUri += "&pageToken=" + pageToken;
             }

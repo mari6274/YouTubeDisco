@@ -141,4 +141,7 @@
   <data name="SystemThemeItem.Content" xml:space="preserve">
     <value>Użyj ustawień systemowych</value>
   </data>
+  <data name="YouTubeApiKey.Header" xml:space="preserve">
+    <value>Klucz YouTube API</value>
+  </data>
 </root>

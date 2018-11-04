@@ -33,6 +33,9 @@ namespace YouTubeDisco.Config
             containerBuilder.RegisterType<YouTubeSearchEngine>()
                 .As<ISearchEngine>()
                 .SingleInstance();
+            containerBuilder.RegisterType<SettingsApiKeyProvider>()
+                .As<IApiKeyProvider>()
+                .SingleInstance();
             containerBuilder.RegisterType<YouTubeApi>()
                 .SingleInstance();
             containerBuilder.RegisterType<HttpClient>()

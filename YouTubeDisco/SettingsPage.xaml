@@ -23,5 +23,6 @@
             <ComboBoxItem x:Uid="/SettingsPage/DarkThemeItem" />
             <ComboBoxItem x:Uid="/SettingsPage/SystemThemeItem" />
         </ComboBox>
+        <PasswordBox x:Uid="/SettingsPage/YouTubeApiKey" Password="{Binding YouTubeApiKey, Mode=TwoWay}" />
     </StackPanel>
 </local:BasePage>

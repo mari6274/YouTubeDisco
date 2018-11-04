@@ -9,6 +9,7 @@ namespace YouTubeDisco.Config
         private const string RemoveVideosKey = "RemoveVideos";
         private const string DefaultStorageFolderName = "YouTubeDisco";
         private const string ThemeKey = "Theme";
+        private const string YouTubeApiKeyKey = "YouTubeApiKey";
 
         public Settings()
         {
@@ -31,7 +32,7 @@ namespace YouTubeDisco.Config
 
         public string StorageFolderName
         {
-            get => (string) Windows.Storage.ApplicationData.Current.RoamingSettings.Values[StorageFolderNameKey];
+            get => (string)Windows.Storage.ApplicationData.Current.RoamingSettings.Values[StorageFolderNameKey];
             set
             {
                 if (value != string.Empty)
@@ -43,7 +44,7 @@ namespace YouTubeDisco.Config
 
         public bool RemoveVideos
         {
-            get => (bool) Windows.Storage.ApplicationData.Current.RoamingSettings.Values[RemoveVideosKey];
+            get => (bool)Windows.Storage.ApplicationData.Current.RoamingSettings.Values[RemoveVideosKey];
             set => Windows.Storage.ApplicationData.Current.RoamingSettings.Values[RemoveVideosKey] = value;
         }
 
@@ -60,5 +61,17 @@ namespace YouTubeDisco.Config
         }
 
         public event EventHandler ThemeChanged;
+
+        public string YouTubeApiKey
+        {
+            get => (string)Windows.Storage.ApplicationData.Current.RoamingSettings.Values[YouTubeApiKeyKey];
+            set
+            {
+                if (value != string.Empty)
+                {
+                    Windows.Storage.ApplicationData.Current.RoamingSettings.Values[YouTubeApiKeyKey] = value;
+                }
+            }
+        }
     }
 }
