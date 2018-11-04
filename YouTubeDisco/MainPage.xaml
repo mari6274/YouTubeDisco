@@ -31,15 +31,9 @@
                     <TextBlock Margin="5" Grid.Row="1" Grid.Column="1" Text="{Binding Description}"
                                TextWrapping="WrapWholeWords" VerticalAlignment="Top" />
                     <RelativePanel Margin="5" Grid.Column="2" Grid.Row="0" Grid.RowSpan="2" Height="90" Width="60">
-                        <Button Click="DownloadButton_OnClick" Width="60" Height="90"
-                                Visibility="{Binding Path=DownloadProgressIsActive, Converter={StaticResource BoolNegation}}">
+                        <Button Click="DownloadButton_OnClick" Width="60" Height="90">
                             <SymbolIcon Symbol="Download" />
                         </Button>
-                        <ProgressRing RelativePanel.AlignVerticalCenterWithPanel="True" 
-                                      RelativePanel.AlignHorizontalCenterWithPanel="True"
-                                      Width="Auto" Height="Auto"
-                                      Visibility="{Binding DownloadProgressIsActive}"
-                                      IsActive="{Binding DownloadProgressIsActive}" />
                     </RelativePanel>
                 </Grid>
             </DataTemplate>
@@ -64,7 +58,8 @@
     </Grid>
     <Page.BottomAppBar>
         <CommandBar>
-            <AppBarButton Icon="Folder" x:Uid="/MainPage/OpenStorageLocationButton" Click="OpenStorageLocation_OnClick"/>
+            <AppBarButton Icon="Download" x:Uid="/MainPage/TasksListButton" Click="TasksListButton_OnClick"/>
+            <AppBarButton Icon="Folder" x:Uid="/MainPage/OpenStorageLocationButton" Click="OpenStorageLocationButton_OnClick"/>
             <CommandBar.SecondaryCommands>
                 <AppBarButton Icon="Setting" x:Uid="/MainPage/SettingsButton" Click="SettingsButton_OnClick" />
             </CommandBar.SecondaryCommands>

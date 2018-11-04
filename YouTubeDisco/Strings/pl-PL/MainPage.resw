@@ -132,6 +132,9 @@
   <data name="SettingsButton.Label" xml:space="preserve">
     <value>Ustawienia</value>
   </data>
+  <data name="TasksListButton.Label" xml:space="preserve">
+    <value>Lista zadań</value>
+  </data>
   <data name="UnexpectedError" xml:space="preserve">
     <value>Wystąpił nieoczekiwany błąd</value>
   </data>

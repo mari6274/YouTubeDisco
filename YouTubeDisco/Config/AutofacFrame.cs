@@ -39,6 +39,8 @@ namespace YouTubeDisco.Config
                 .SingleInstance();
             containerBuilder.RegisterType<Settings>()
                 .SingleInstance();
+            containerBuilder.RegisterType<TasksVm>()
+                .SingleInstance();
             //Dependencies registration
 
             _container = containerBuilder.Build();

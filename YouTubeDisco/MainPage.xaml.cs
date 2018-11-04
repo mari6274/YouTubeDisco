@@ -15,6 +15,7 @@ namespace YouTubeDisco
     public sealed partial class MainPage : BasePage
     {
         private SearchResultsVm _searchResultsVm;
+        private TasksVm _tasksVm;
         private IVideoDownloader _videoDownloader;
         private IAudioExtractor _audioExtractor;
         private readonly ResourceLoader _resourceLoader;
@@ -38,6 +39,11 @@ namespace YouTubeDisco
             }
         }
 
+        public TasksVm TasksVm
+        {
+            set => _tasksVm = value;
+        }
+
         public MainPage()
         {
             InitializeComponent();
@@ -54,7 +60,13 @@ namespace YouTubeDisco
         {
             var button = (Button) sender;
             var searchResult = (SearchResult) button.DataContext;
-            searchResult.DownloadProgressIsActive = true;
+
+            button.Visibility = Visibility.Collapsed;
+
+            var downloadTask = new DownloadTask(searchResult);
+            _tasksVm.Tasks.Add(downloadTask);
+
+            downloadTask.Start();
 
             var youTubeDiscoVideoFolder = await KnownFolders.VideosLibrary
                 .CreateFolderAsync(Settings.StorageFolderName, CreationCollisionOption.OpenIfExists);
@@ -67,11 +79,13 @@ namespace YouTubeDisco
             if (extractionResult == ExtractionResult.CodecNotFound)
             {
                 ShowMessageDialog("MissingMpeg3Encoder");
+                downloadTask.Fail();
             }
 
             if (extractionResult == ExtractionResult.Failed)
             {
                 ShowMessageDialog("UnexpectedError");
+                downloadTask.Fail();
             }
 
             if (Settings.RemoveVideos)
@@ -79,7 +93,7 @@ namespace YouTubeDisco
                 await videoFile.DeleteAsync(StorageDeleteOption.PermanentDelete);
             }
 
-            searchResult.DownloadProgressIsActive = false;
+            downloadTask.Finish();
         }
 
         private void ShowMessageDialog(string contentTextKey)
@@ -94,11 +108,16 @@ namespace YouTubeDisco
             Frame.Navigate(typeof(SettingsPage));
         }
 
-        private async void OpenStorageLocation_OnClick(object sender, RoutedEventArgs e)
+        private async void OpenStorageLocationButton_OnClick(object sender, RoutedEventArgs e)
         {
             var storageFolder = await KnownFolders.MusicLibrary
                 .CreateFolderAsync(Settings.StorageFolderName, CreationCollisionOption.OpenIfExists);
             Launcher.LaunchFolderAsync(storageFolder);
+        }
+
+        private void TasksListButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            Frame.Navigate(typeof(TasksPage));
         }
     }
 }
