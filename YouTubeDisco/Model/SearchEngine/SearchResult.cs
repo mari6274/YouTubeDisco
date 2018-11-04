@@ -1,12 +1,7 @@
-﻿using System.ComponentModel;
-using System.Runtime.CompilerServices;
-
-namespace YouTubeDisco.Model.SearchEngine
+﻿namespace YouTubeDisco.Model.SearchEngine
 {
-    public class SearchResult : INotifyPropertyChanged
+    public class SearchResult
     {
-        private bool _downloadProgressIsActive;
-
         public SearchResult(string title, string description, string url, string thumbnailUri)
         {
             Title = title;
@@ -19,22 +14,5 @@ namespace YouTubeDisco.Model.SearchEngine
         public string Description { get; set; }
         public string Url { get; set; }
         public string ThumbnailUri { get; set; }
-
-        public bool DownloadProgressIsActive
-        {
-            get => _downloadProgressIsActive;
-            set
-            {
-                _downloadProgressIsActive = value;
-                OnPropertyChanged();
-            }
-        }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
     }
 }
