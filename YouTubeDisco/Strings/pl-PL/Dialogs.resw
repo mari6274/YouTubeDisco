@@ -117,22 +117,13 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="MissingMpeg3Encoder" xml:space="preserve">
-    <value>Missing MPEG-3 encoder on this device</value>
+  <data name="Close" xml:space="preserve">
+    <value>Zamknij</value>
   </data>
-  <data name="OpenStorageLocationButton.Label" xml:space="preserve">
-    <value>Open storage location</value>
+  <data name="UnhandledExceptionContent" xml:space="preserve">
+    <value>Wystąpił nieobsłużony wyjątek. Aplikacja wyłączy się.</value>
   </data>
-  <data name="SearchBox.PlaceholderText" xml:space="preserve">
-    <value>Search</value>
-  </data>
-  <data name="SettingsButton.Label" xml:space="preserve">
-    <value>Settings</value>
-  </data>
-  <data name="TasksListButton.Label" xml:space="preserve">
-    <value>Tasks list</value>
-  </data>
-  <data name="UnexpectedError" xml:space="preserve">
-    <value>Unexpected error occured</value>
+  <data name="UnhandledExceptionTitle" xml:space="preserve">
+    <value>Nieobsłużony wyjątek</value>
   </data>
 </root>

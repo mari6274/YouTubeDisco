@@ -1,13 +1,12 @@
 ﻿using System;
-using Windows.ApplicationModel.Resources;
 using Windows.Storage;
 using Windows.System;
-using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using YouTubeDisco.Model.AudioExtractor;
 using YouTubeDisco.Model.SearchEngine;
 using YouTubeDisco.Model.VideoDownloader;
+using YouTubeDisco.UI;
 using YouTubeDisco.ViewModels;
 
 namespace YouTubeDisco
@@ -18,7 +17,7 @@ namespace YouTubeDisco
         private TasksVm _tasksVm;
         private IVideoDownloader _videoDownloader;
         private IAudioExtractor _audioExtractor;
-        private readonly ResourceLoader _resourceLoader;
+        private DialogCreator _dialogCreator;
 
         public IAudioExtractor AudioExtractor
         {
@@ -43,11 +42,14 @@ namespace YouTubeDisco
         {
             set => _tasksVm = value;
         }
+        public DialogCreator DialogCreator
+        {
+            set => _dialogCreator = value;
+        }
 
         public MainPage()
         {
             InitializeComponent();
-            _resourceLoader = ResourceLoader.GetForCurrentView("MainPage");
         }
 
         private void SearchBox_OnQuerySubmitted(AutoSuggestBox sender, AutoSuggestBoxQuerySubmittedEventArgs args)
@@ -58,8 +60,8 @@ namespace YouTubeDisco
 
         private async void DownloadButton_OnClick(object sender, RoutedEventArgs e)
         {
-            var button = (Button) sender;
-            var searchResult = (SearchResult) button.DataContext;
+            var button = (Button)sender;
+            var searchResult = (SearchResult)button.DataContext;
 
             button.Visibility = Visibility.Collapsed;
 
@@ -78,13 +80,13 @@ namespace YouTubeDisco
 
             if (extractionResult == ExtractionResult.CodecNotFound)
             {
-                ShowMessageDialog("MissingMpeg3Encoder");
+                _dialogCreator.ShowMessageDialog("MissingMpeg3Encoder");
                 downloadTask.Fail();
             }
 
             if (extractionResult == ExtractionResult.Failed)
             {
-                ShowMessageDialog("UnexpectedError");
+                _dialogCreator.ShowMessageDialog("UnexpectedError");
                 downloadTask.Fail();
             }
 
@@ -94,13 +96,6 @@ namespace YouTubeDisco
             }
 
             downloadTask.Finish();
-        }
-
-        private void ShowMessageDialog(string contentTextKey)
-        {
-            var messageDialog = new MessageDialog(_resourceLoader.GetString(contentTextKey));
-            messageDialog.Commands.Add(new UICommand(_resourceLoader.GetString("Close")));
-            messageDialog.ShowAsync();
         }
 
         private void SettingsButton_OnClick(object sender, RoutedEventArgs e)

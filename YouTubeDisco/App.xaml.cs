@@ -7,6 +7,7 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 using YouTubeDisco.Config;
+using YouTubeDisco.UI;
 
 namespace YouTubeDisco
 {
@@ -15,6 +16,13 @@ namespace YouTubeDisco
     /// </summary>
     sealed partial class App : Application
     {
+
+        private DialogCreator _dialogCreator;
+
+        public DialogCreator DialogCreator
+        {
+            set => _dialogCreator = value;
+        }
         /// <summary>
         /// Initializes the singleton application object.  This is the first line of authored code
         /// executed, and as such is the logical equivalent of main() or WinMain().
@@ -23,6 +31,7 @@ namespace YouTubeDisco
         {
             InitializeComponent();
             Suspending += OnSuspending;
+            UnhandledException += OnUnhandledException;
         }
 
         /// <summary>
@@ -45,7 +54,7 @@ namespace YouTubeDisco
             if (rootFrame == null)
             {
                 // Create a Frame to act as the navigation context and navigate to the first page
-                rootFrame = new AutofacFrame();
+                rootFrame = new AutofacFrame(this);
 
                 rootFrame.NavigationFailed += OnNavigationFailed;
                 rootFrame.Navigated += RootFrame_Navigated;
@@ -125,6 +134,12 @@ namespace YouTubeDisco
             var deferral = e.SuspendingOperation.GetDeferral();
             //TODO: Save application state and stop any background activity
             deferral.Complete();
+        }
+
+        private void OnUnhandledException(object sender, UnhandledExceptionEventArgs e)
+        {
+            e.Handled = true;
+            _dialogCreator.ShowUnhandledExceptionMessage(e.Exception.Message);
         }
     }
 }

@@ -126,6 +126,7 @@
     <Compile Include="SettingsPage.xaml.cs">
       <DependentUpon>SettingsPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UI\DialogCreator.cs" />
     <Compile Include="ViewModels\DownloadTask.cs" />
     <Compile Include="ViewModels\State.cs" />
     <Compile Include="ViewModels\TasksVm.cs" />
@@ -140,6 +141,8 @@
     <PRIResource Include="Strings\en-US\SettingsPage.resw" />
     <PRIResource Include="Strings\en-US\MainPage.resw" />
     <PRIResource Include="Strings\pl-PL\SettingsPage.resw" />
+    <PRIResource Include="Strings\pl-PL\Dialogs.resw" />
+    <PRIResource Include="Strings\en-US\Dialogs.resw" />
     <None Include="YouTubeDisco_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>

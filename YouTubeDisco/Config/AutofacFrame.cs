@@ -8,6 +8,8 @@ using YouTubeDisco.Model.SearchEngine.YouTube;
 using YouTubeDisco.Model.VideoDownloader;
 using YouTubeDisco.Model.VideoDownloader.VideoLibrary;
 using YouTubeDisco.ViewModels;
+using YouTubeDisco.UI;
+using Windows.UI.Xaml;
 
 namespace YouTubeDisco.Config
 {
@@ -15,7 +17,7 @@ namespace YouTubeDisco.Config
     {
         private readonly IContainer _container;
 
-        public AutofacFrame()
+        public AutofacFrame(Application app)
         {
             var containerBuilder = new ContainerBuilder();
 
@@ -44,9 +46,13 @@ namespace YouTubeDisco.Config
                 .SingleInstance();
             containerBuilder.RegisterType<TasksVm>()
                 .SingleInstance();
+            containerBuilder.RegisterType<DialogCreator>()
+                .SingleInstance();
             //Dependencies registration
 
             _container = containerBuilder.Build();
+
+            _container.InjectUnsetProperties(app);
 
             InitializeFrame();
         }
