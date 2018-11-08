@@ -65,13 +65,7 @@ namespace YouTubeDisco.Config
         public string YouTubeApiKey
         {
             get => (string)Windows.Storage.ApplicationData.Current.RoamingSettings.Values[YouTubeApiKeyKey];
-            set
-            {
-                if (value != string.Empty)
-                {
-                    Windows.Storage.ApplicationData.Current.RoamingSettings.Values[YouTubeApiKeyKey] = value;
-                }
-            }
+            set => Windows.Storage.ApplicationData.Current.RoamingSettings.Values[YouTubeApiKeyKey] = value;
         }
     }
 }
