@@ -120,6 +120,9 @@
   <data name="Close" xml:space="preserve">
     <value>Close</value>
   </data>
+  <data name="Error" xml:space="preserve">
+    <value>Error</value>
+  </data>
   <data name="SearchEngineError" xml:space="preserve">
     <value>Error occured searching. Check settings and network connection. </value>
   </data>

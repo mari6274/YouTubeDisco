@@ -58,7 +58,7 @@ namespace YouTubeDisco.ViewModels
                 {
                     coreDispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
                         {
-                            _dialogCreator.ShowMessageDialog("SearchEngineError");
+                            _dialogCreator.ShowMessageDialog("Error", "SearchEngineError");
                         });
                 });
 
