@@ -18,7 +18,7 @@ namespace YouTubeDisco.Model.SearchEngine.YouTube
             _apiKeyProvider = apiKeyProvider;
         }
 
-        internal async Task<SearchListResponse> List(string query, string pageToken)
+        internal async Task<SearchListResponse> List(string query, string pageToken, ErrorDelegate errorDelegate)
         {
             var requestUri = ApiAddress + Resource + "?part=snippet&type=video&maxResults=5&key=" + _apiKeyProvider.getKey() + "&q=" + query;
             if (pageToken != null)
@@ -27,7 +27,15 @@ namespace YouTubeDisco.Model.SearchEngine.YouTube
             }
             var response = await _httpClient.GetAsync(requestUri);
             var content = await response.Content.ReadAsStringAsync();
-            return JsonConvert.DeserializeObject<SearchListResponse>(content);
+            if (response.IsSuccessStatusCode)
+            {
+                return JsonConvert.DeserializeObject<SearchListResponse>(content);
+            }
+            else
+            {
+                errorDelegate();
+                return new SearchListResponse();
+            }
         }
     }
 }

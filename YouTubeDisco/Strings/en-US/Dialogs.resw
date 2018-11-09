@@ -120,6 +120,9 @@
   <data name="Close" xml:space="preserve">
     <value>Close</value>
   </data>
+  <data name="SearchEngineError" xml:space="preserve">
+    <value>Error occured searching. Check settings and network connection. </value>
+  </data>
   <data name="UnhandledExceptionContent" xml:space="preserve">
     <value>Unhandled exception occurred. Application will close now.</value>
   </data>

@@ -6,7 +6,7 @@ namespace YouTubeDisco.Model.SearchEngine.YouTube
     {
         public string NextPageToken { get; set; }
         public string PrevPageToken { get; set; }
-        public List<Resource> Items { get; set; }
+        public IReadOnlyList<Resource> Items { get; set; } = new List<Resource>().AsReadOnly();
     }
 
     public class Resource

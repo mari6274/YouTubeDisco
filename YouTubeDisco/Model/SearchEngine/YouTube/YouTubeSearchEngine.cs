@@ -10,9 +10,9 @@ namespace YouTubeDisco.Model.SearchEngine.YouTube
 
         public YouTubeSearchEngine(YouTubeApi api) => _api = api;
 
-        public async Task<SearchResultPage> Search(string query, string pageToken)
+        public async Task<SearchResultPage> Search(string query, string pageToken, ErrorDelegate errorDelegate)
         {
-            var searchListResponse = await _api.List(query, pageToken);
+            var searchListResponse = await _api.List(query, pageToken, errorDelegate);
             var searchResults = searchListResponse.Items.Select(resource =>
                     new SearchResult(
                         resource.Snippet.Title,

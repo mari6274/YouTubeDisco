@@ -120,6 +120,9 @@
   <data name="Close" xml:space="preserve">
     <value>Zamknij</value>
   </data>
+  <data name="SearchEngineError" xml:space="preserve">
+    <value>Wystąpił błąd podczas próby wyszukiwania. Sprawdź ustawienia i połączenie sieciowe.</value>
+  </data>
   <data name="UnhandledExceptionContent" xml:space="preserve">
     <value>Wystąpił nieobsłużony wyjątek. Aplikacja wyłączy się.</value>
   </data>

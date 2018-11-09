@@ -4,6 +4,6 @@ namespace YouTubeDisco.Model.SearchEngine
 {
     public interface ISearchEngine
     {
-        Task<SearchResultPage> Search(string query, string pageToken);
+        Task<SearchResultPage> Search(string query, string pageToken, ErrorDelegate errorDelegate);
     }
 }
