@@ -17,7 +17,16 @@ namespace YouTubeDisco.Model.VideoDownloader.VideoLibrary
                 var youTube = YouTube.Default;
                 var video = youTube.GetVideo(searchResult.Url);
                 var file = await outputFolder.CreateFileAsync(video.FullName, CreationCollisionOption.GenerateUniqueName);
-                await FileIO.WriteBufferAsync(file, video.GetBytes().AsBuffer());
+
+                try
+                {
+                    await FileIO.WriteBufferAsync(file, video.GetBytes().AsBuffer());
+                }
+                catch (Exception e)
+                {
+                    await file.DeleteAsync();
+                    throw e;
+                }
                 return file;
             });
         }
