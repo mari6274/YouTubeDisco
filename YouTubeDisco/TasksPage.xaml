@@ -44,7 +44,9 @@
                                 RelativePanel.AlignHorizontalCenterWithPanel="True"
                                 Symbol="Accept"
                                 Visibility="{Binding State, Converter={StaticResource TaskStateConverter}, ConverterParameter={StaticResource StateFinished}}"/>
-                    <SymbolIcon Symbol="Clear"
+                    <SymbolIcon RelativePanel.AlignVerticalCenterWithPanel="True"
+                                RelativePanel.AlignHorizontalCenterWithPanel="True"
+                                Symbol="Clear"
                                 Visibility="{Binding State, Converter={StaticResource TaskStateConverter}, ConverterParameter={StaticResource StateFailed}}"/>
                 </RelativePanel>
 
