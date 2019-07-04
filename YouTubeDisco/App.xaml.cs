@@ -77,6 +77,8 @@ namespace YouTubeDisco
                     // parameter
                     rootFrame.Navigate(typeof(MainPage), e.Arguments);
                 }
+
+                rootFrame.CacheSize = 1;
                 // Ensure the current window is active
                 Window.Current.Activate();
             }
