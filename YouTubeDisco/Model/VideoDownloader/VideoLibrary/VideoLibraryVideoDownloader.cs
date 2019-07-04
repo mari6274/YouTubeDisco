@@ -24,8 +24,8 @@ namespace YouTubeDisco.Model.VideoDownloader.VideoLibrary
                 }
                 catch (Exception e)
                 {
-                    await file.DeleteAsync();
-                    throw e;
+                    file.DeleteAsync();
+                    throw new VideoDownloadException("Video could not be downloaded.", e);
                 }
                 return file;
             });

@@ -54,7 +54,7 @@ namespace YouTubeDisco
 
         private void SearchBox_OnQuerySubmitted(AutoSuggestBox sender, AutoSuggestBoxQuerySubmittedEventArgs args)
         {
-            SearchResultsListView.ItemsSource =
+            SearchResultsListView.ItemsSource = 
                 _searchResultsVm.CreateNewCollection(args.QueryText, SearchResultsProgressBar);
         }
 
@@ -72,30 +72,38 @@ namespace YouTubeDisco
 
             var youTubeDiscoVideoFolder = await KnownFolders.VideosLibrary
                 .CreateFolderAsync(Settings.StorageFolderName, CreationCollisionOption.OpenIfExists);
-            var videoFile = await _videoDownloader.DownloadVideo(searchResult, youTubeDiscoVideoFolder);
-
-            var youTubeDiscoMusicFolder = await KnownFolders.MusicLibrary
-                .CreateFolderAsync(Settings.StorageFolderName, CreationCollisionOption.OpenIfExists);
-            var extractionResult = await _audioExtractor.ExtractAudio(videoFile, youTubeDiscoMusicFolder);
-
-            if (extractionResult == ExtractionResult.CodecNotFound)
+            try
             {
-                _dialogCreator.ShowMessageDialog("MissingMpeg3Encoder");
+                var videoFile = await _videoDownloader.DownloadVideo(searchResult, youTubeDiscoVideoFolder);
+
+                var youTubeDiscoMusicFolder = await KnownFolders.MusicLibrary
+               .CreateFolderAsync(Settings.StorageFolderName, CreationCollisionOption.OpenIfExists);
+                var extractionResult = await _audioExtractor.ExtractAudio(videoFile, youTubeDiscoMusicFolder);
+
+                if (extractionResult == ExtractionResult.CodecNotFound)
+                {
+                    _dialogCreator.ShowMessageDialog("MissingMpeg3Encoder");
+                    downloadTask.Fail();
+                }
+
+                if (extractionResult == ExtractionResult.Failed)
+                {
+                    _dialogCreator.ShowMessageDialog("UnexpectedError");
+                    downloadTask.Fail();
+                }
+
+                if (Settings.RemoveVideos)
+                {
+                    await videoFile.DeleteAsync(StorageDeleteOption.PermanentDelete);
+                }
+
+                downloadTask.Finish();
+            }
+            catch (VideoDownloadException)
+            {
                 downloadTask.Fail();
             }
-
-            if (extractionResult == ExtractionResult.Failed)
-            {
-                _dialogCreator.ShowMessageDialog("UnexpectedError");
-                downloadTask.Fail();
-            }
-
-            if (Settings.RemoveVideos)
-            {
-                await videoFile.DeleteAsync(StorageDeleteOption.PermanentDelete);
-            }
-
-            downloadTask.Finish();
+           
         }
 
         private void SettingsButton_OnClick(object sender, RoutedEventArgs e)

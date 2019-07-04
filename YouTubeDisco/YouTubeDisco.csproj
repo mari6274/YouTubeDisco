@@ -99,6 +99,7 @@
     <Compile Include="Converters\DownloadTaskStateConverter.cs" />
     <Compile Include="Model\SearchEngine\ErrorDelegate.cs" />
     <Compile Include="Model\SearchEngine\YouTube\IApiKeyProvider.cs" />
+    <Compile Include="Model\VideoDownloader\VideoDownloadExeception.cs" />
     <Compile Include="TasksPage.xaml.cs">
       <DependentUpon>TasksPage.xaml</DependentUpon>
     </Compile>
