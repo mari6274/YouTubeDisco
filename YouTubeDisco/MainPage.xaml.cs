@@ -8,6 +8,7 @@ using YouTubeDisco.Model.SearchEngine;
 using YouTubeDisco.Model.VideoDownloader;
 using YouTubeDisco.UI;
 using YouTubeDisco.ViewModels;
+using NCM = Windows.UI.Xaml.Navigation.NavigationCacheMode;
 
 namespace YouTubeDisco
 {
@@ -50,6 +51,7 @@ namespace YouTubeDisco
         public MainPage()
         {
             InitializeComponent();
+            NavigationCacheMode = NCM.Enabled;
         }
 
         private void SearchBox_OnQuerySubmitted(AutoSuggestBox sender, AutoSuggestBoxQuerySubmittedEventArgs args)
